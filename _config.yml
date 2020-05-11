@@ -21,8 +21,16 @@ paginate:           5
 paginate_path:      "/posts/page:num/"
 
 
-
 plugins:
   - jekyll-feed
   - jekyll-paginate
   - jekyll-sitemap ## Uncomment this line to silently generate a sitemaps.org compliant sitemap for your Jekyll site
+
+tipue_search:
+  include: # 포함할 url을 선택한다.
+    pages: false # posts 폴더 이외에 다른 문서 선택 여부 (true일 경우 모든 url이 포함된다.)
+    collections: []
+  exclude: # 제외시킬 url을 선택한다.
+    files: [search.html, index.html, tags.html]
+    categories: []
+    tags: []
