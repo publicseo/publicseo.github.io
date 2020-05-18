@@ -23,6 +23,18 @@ comments : true
               on {{ page.date | date: '%B %d, %Y' }} &middot; {% include read_time.html
               content=page.content %}
             </span>
+
+
+            {% if page.tags %}
+              {% for tag in page.tags %}
+                {% if site.data.tags contains tag %}
+                   <a href="/posts/?tag={{ tag }}">
+                     <span class="tag">{{ site.data.format[tag] }}</span>
+                   </a>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+
           </div>
         </div>
       </div>
@@ -55,3 +67,39 @@ comments : true
       </div>
     </div>
   </div>
+
+
+  <link rel="stylesheet" href="/public/css/flexslider.css" type="text/css">
+  <script src="/public/js/jquery1.6.2.js"></script>
+  <script src="/public/js/jquery.flexslider.js"></script>
+  <style>
+  .tag {
+   font-family: 'flexslider-icon';
+   background-color : #ff8a78;
+   margin-top : 30px;
+   margin-right : 4px;
+   border-radius:0.5em;
+    -moz-border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+  }
+
+  </style>
+
+  <script type="text/javascript">
+
+    $(document).ready(function() {
+  let currentTag = "";
+  const queryTag = getQuery().tag;
+  if (queryTag) {
+    currentTag = queryTag;
+    filterByTagName(currentTag)
+  }
+});
+
+    function updateQueryString(tagName) {
+  const path = `${location.protocol}//${location.host}${location.pathname}?tag=${tagName}`;
+  window.history.replaceState({ path }, '', path);
+  }
+
+
+  </script>
